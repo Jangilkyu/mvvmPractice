@@ -12,8 +12,6 @@ import DropDown
 import SnapKit
 
 class MainController: UIViewController {
-    fileprivate let mainCellId = "mainCellId"
-    
     let viewModel = MainViewModel(restProcessor: RestProcessor())
     
     
@@ -98,7 +96,7 @@ class MainController: UIViewController {
     private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(MainCell.self, forCellWithReuseIdentifier: mainCellId)
+        collectionView.register(MainCell.self, forCellWithReuseIdentifier: MainCell.identifier)
     }
     
     private func configureSkeletonView() {
@@ -231,7 +229,7 @@ extension MainController: SkeletonCollectionViewDataSource {
         _ skeletonView: UICollectionView,
         cellIdentifierForItemAt indexPath: IndexPath
     ) -> SkeletonView.ReusableCellIdentifier {
-        return mainCellId
+        return MainCell.identifier
     }
     
     func collectionSkeletonView(
@@ -246,7 +244,7 @@ extension MainController: SkeletonCollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: mainCellId,
+            withReuseIdentifier: MainCell.identifier,
             for: indexPath) as? MainCell else { return UICollectionViewCell() }
         guard let cities = self.viewModel.seoulCities else { return UICollectionViewCell() }
         let city = cities.getCity()
@@ -268,7 +266,7 @@ extension MainController: SkeletonCollectionViewDataSource {
         _ skeletonView: UICollectionView,
         skeletonCellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell? {
-        skeletonView.dequeueReusableCell(withReuseIdentifier: mainCellId, for: indexPath)
+        skeletonView.dequeueReusableCell(withReuseIdentifier: MainCell.identifier, for: indexPath)
     }
 }
 
