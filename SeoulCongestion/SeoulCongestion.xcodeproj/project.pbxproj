@@ -53,6 +53,8 @@
 		FE1EF14829BE087A00FF7113 /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1EF14429BE087A00FF7113 /* Cities.swift */; };
 		FE1EF14929BE087A00FF7113 /* SearchCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1EF14529BE087A00FF7113 /* SearchCities.swift */; };
 		FE1EF14A29BE087A00FF7113 /* SeoulCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1EF14629BE087A00FF7113 /* SeoulCities.swift */; };
+		FE335FDF2ADA1BFC0010A7B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FE335FDE2ADA1BFC0010A7B2 /* SnapKit */; };
+		FE335FE12ADA1BFC0010A7B2 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = FE335FE02ADA1BFC0010A7B2 /* SnapKit-Dynamic */; };
 		FE74021E29814B510014629A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE74021D29814B510014629A /* AppDelegate.swift */; };
 		FE74022029814B510014629A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE74021F29814B510014629A /* SceneDelegate.swift */; };
 		FE74022729814B520014629A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE74022629814B520014629A /* Assets.xcassets */; };
@@ -128,7 +130,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE335FE12ADA1BFC0010A7B2 /* SnapKit-Dynamic in Frameworks */,
 				FE06CBFE29BDE11C003297E9 /* SkeletonView in Frameworks */,
+				FE335FDF2ADA1BFC0010A7B2 /* SnapKit in Frameworks */,
 				FEDAD7922AA95F440057A99F /* DropDown in Frameworks */,
 				FE06CBF829BDDBE3003297E9 /* Lottie in Frameworks */,
 			);
@@ -179,9 +183,7 @@
 				FE06CBBA29BDDABF003297E9 /* DetailCell */,
 				FE06CBBE29BDDABF003297E9 /* DetailView */,
 				FE06CBC029BDDABF003297E9 /* Bike */,
-				FE06CBC729BDDABF003297E9 /* MainController.swift */,
 				FE06CBC829BDDABF003297E9 /* CityDetailController.swift */,
-				FE06CBC929BDDABF003297E9 /* Cell */,
 				FE06CBCB29BDDABF003297E9 /* View */,
 				FE06CBD129BDDABF003297E9 /* MainNavigationController.swift */,
 			);
@@ -234,14 +236,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		FE06CBC929BDDABF003297E9 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				FE06CBCA29BDDABF003297E9 /* MainCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		FE06CBCB29BDDABF003297E9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +285,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		FE335FE22ADA1C260010A7B2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FE06CBCA29BDDABF003297E9 /* MainCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		FE74021129814B510014629A = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +339,8 @@
 		FEB09E3E2AD6C13800CD4949 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				FE335FE22ADA1C260010A7B2 /* Cell */,
+				FE06CBC729BDDABF003297E9 /* MainController.swift */,
 				FEB09E3F2AD6C13F00CD4949 /* ViewModel */,
 			);
 			path = Main;
@@ -370,6 +374,8 @@
 				FE06CBF729BDDBE3003297E9 /* Lottie */,
 				FE06CBFD29BDE11C003297E9 /* SkeletonView */,
 				FEDAD7912AA95F440057A99F /* DropDown */,
+				FE335FDE2ADA1BFC0010A7B2 /* SnapKit */,
+				FE335FE02ADA1BFC0010A7B2 /* SnapKit-Dynamic */,
 			);
 			productName = SeoulCongestion;
 			productReference = FE74021A29814B510014629A /* SeoulCongestion.app */;
@@ -403,6 +409,7 @@
 				FE06CBF629BDDBE3003297E9 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				FE06CBFC29BDE11C003297E9 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				FEDAD7902AA95F440057A99F /* XCRemoteSwiftPackageReference "DropDown" */,
+				FE335FDD2ADA1BFC0010A7B2 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = FE74021B29814B510014629A /* Products */;
 			projectDirPath = "";
@@ -714,6 +721,14 @@
 				minimumVersion = 1.7.0;
 			};
 		};
+		FE335FDD2ADA1BFC0010A7B2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
 		FEDAD7902AA95F440057A99F /* XCRemoteSwiftPackageReference "DropDown" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AssistoLab/DropDown";
@@ -734,6 +749,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FE06CBFC29BDE11C003297E9 /* XCRemoteSwiftPackageReference "SkeletonView" */;
 			productName = SkeletonView;
+		};
+		FE335FDE2ADA1BFC0010A7B2 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE335FDD2ADA1BFC0010A7B2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		FE335FE02ADA1BFC0010A7B2 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE335FDD2ADA1BFC0010A7B2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
 		};
 		FEDAD7912AA95F440057A99F /* DropDown */ = {
 			isa = XCSwiftPackageProductDependency;
