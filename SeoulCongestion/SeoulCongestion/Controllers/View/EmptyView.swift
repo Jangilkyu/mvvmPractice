@@ -16,7 +16,7 @@ class EmptyView: UIView {
   
   required init() {
     super.init(frame: .zero)
-
+      self.isHidden = true
     addViews()
     setConstraints()
   }

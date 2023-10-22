@@ -61,6 +61,12 @@
 		FE74022A29814B520014629A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE74022829814B520014629A /* LaunchScreen.storyboard */; };
 		FE9121802A920D5E00C08B45 /* CityTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE91217F2A920D5E00C08B45 /* CityTab.swift */; };
 		FE9121822A9256CE00C08B45 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9121812A9256CE00C08B45 /* Extension+UIImage.swift */; };
+		FEA02EBC2AE4C93200280DA3 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = FEA02EBB2AE4C93200280DA3 /* RxGesture */; };
+		FEA02EBF2AE4C93900280DA3 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = FEA02EBE2AE4C93900280DA3 /* RxBlocking */; };
+		FEA02EC12AE4C93900280DA3 /* RxBlocking-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = FEA02EC02AE4C93900280DA3 /* RxBlocking-Dynamic */; };
+		FEA02EC32AE4C93900280DA3 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = FEA02EC22AE4C93900280DA3 /* RxCocoa */; };
+		FEA02EC52AE4C93900280DA3 /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = FEA02EC42AE4C93900280DA3 /* RxCocoa-Dynamic */; };
+		FEA02EC72AE4C93900280DA3 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = FEA02EC62AE4C93900280DA3 /* RxRelay */; };
 		FEA773AC29CB43C30095B8FE /* RatioLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA773AB29CB43C30095B8FE /* RatioLabelView.swift */; };
 		FEB09E412AD6C14B00CD4949 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB09E402AD6C14B00CD4949 /* MainViewModel.swift */; };
 		FEDAD7922AA95F440057A99F /* DropDown in Frameworks */ = {isa = PBXBuildFile; productRef = FEDAD7912AA95F440057A99F /* DropDown */; };
@@ -130,11 +136,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEA02EC32AE4C93900280DA3 /* RxCocoa in Frameworks */,
 				FE335FE12ADA1BFC0010A7B2 /* SnapKit-Dynamic in Frameworks */,
 				FE06CBFE29BDE11C003297E9 /* SkeletonView in Frameworks */,
 				FE335FDF2ADA1BFC0010A7B2 /* SnapKit in Frameworks */,
 				FEDAD7922AA95F440057A99F /* DropDown in Frameworks */,
+				FEA02EBC2AE4C93200280DA3 /* RxGesture in Frameworks */,
+				FEA02EC52AE4C93900280DA3 /* RxCocoa-Dynamic in Frameworks */,
 				FE06CBF829BDDBE3003297E9 /* Lottie in Frameworks */,
+				FEA02EBF2AE4C93900280DA3 /* RxBlocking in Frameworks */,
+				FEA02EC12AE4C93900280DA3 /* RxBlocking-Dynamic in Frameworks */,
+				FEA02EC72AE4C93900280DA3 /* RxRelay in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +388,12 @@
 				FEDAD7912AA95F440057A99F /* DropDown */,
 				FE335FDE2ADA1BFC0010A7B2 /* SnapKit */,
 				FE335FE02ADA1BFC0010A7B2 /* SnapKit-Dynamic */,
+				FEA02EBB2AE4C93200280DA3 /* RxGesture */,
+				FEA02EBE2AE4C93900280DA3 /* RxBlocking */,
+				FEA02EC02AE4C93900280DA3 /* RxBlocking-Dynamic */,
+				FEA02EC22AE4C93900280DA3 /* RxCocoa */,
+				FEA02EC42AE4C93900280DA3 /* RxCocoa-Dynamic */,
+				FEA02EC62AE4C93900280DA3 /* RxRelay */,
 			);
 			productName = SeoulCongestion;
 			productReference = FE74021A29814B510014629A /* SeoulCongestion.app */;
@@ -410,6 +428,8 @@
 				FE06CBFC29BDE11C003297E9 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				FEDAD7902AA95F440057A99F /* XCRemoteSwiftPackageReference "DropDown" */,
 				FE335FDD2ADA1BFC0010A7B2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				FEA02EBA2AE4C93200280DA3 /* XCRemoteSwiftPackageReference "RxGesture" */,
+				FEA02EBD2AE4C93900280DA3 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = FE74021B29814B510014629A /* Products */;
 			projectDirPath = "";
@@ -729,6 +749,22 @@
 				minimumVersion = 5.6.0;
 			};
 		};
+		FEA02EBA2AE4C93200280DA3 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.4;
+			};
+		};
+		FEA02EBD2AE4C93900280DA3 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
 		FEDAD7902AA95F440057A99F /* XCRemoteSwiftPackageReference "DropDown" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AssistoLab/DropDown";
@@ -759,6 +795,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FE335FDD2ADA1BFC0010A7B2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		FEA02EBB2AE4C93200280DA3 /* RxGesture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEA02EBA2AE4C93200280DA3 /* XCRemoteSwiftPackageReference "RxGesture" */;
+			productName = RxGesture;
+		};
+		FEA02EBE2AE4C93900280DA3 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEA02EBD2AE4C93900280DA3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		FEA02EC02AE4C93900280DA3 /* RxBlocking-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEA02EBD2AE4C93900280DA3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxBlocking-Dynamic";
+		};
+		FEA02EC22AE4C93900280DA3 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEA02EBD2AE4C93900280DA3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		FEA02EC42AE4C93900280DA3 /* RxCocoa-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEA02EBD2AE4C93900280DA3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxCocoa-Dynamic";
+		};
+		FEA02EC62AE4C93900280DA3 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEA02EBD2AE4C93900280DA3 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
 		};
 		FEDAD7912AA95F440057A99F /* DropDown */ = {
 			isa = XCSwiftPackageProductDependency;

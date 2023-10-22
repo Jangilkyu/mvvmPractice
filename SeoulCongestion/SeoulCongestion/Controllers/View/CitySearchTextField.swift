@@ -78,6 +78,7 @@ class CitySearchTextField: UIView {
   
   required init() {
     super.init(frame: .zero)
+      textField.isEnabled = false
     addViews()
     setConstraints()
     configureLottie()
