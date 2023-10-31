@@ -18,13 +18,16 @@ class MainViewModel {
     
     public var citySearchTextFieldObserver = PublishRelay<String>()
     public var citySearchTextFieldOutPutObserver = PublishRelay<String>()
+    public var automaticSearch = BehaviorRelay<String>(value: "")
+    public var aa = PublishRelay<[City]>()
     
     public var cityTabListObserver = PublishRelay<CityTab>()
     public var dropDownObserver = PublishRelay<String>()
     public var sortCitiesByAlphabetOutputObserver = PublishRelay<[City]>()
     public var didSelectTabObserver = PublishRelay<CityTab>()
     public var didSelectTabOutPutObserver = PublishRelay<[City]>()
-    
+    public var citiesRelay = BehaviorRelay<[CitySectionModel]>(value: [])
+
     /// 전체보기
     var viewAll: [City] = []
     /// 고궁 · 문화유산
@@ -60,6 +63,35 @@ class MainViewModel {
             self.didSelectTabOutPutObserver.accept(result)
         }
         .disposed(by: disposeBag)
+        
+        automaticSearch.subscribe { text in
+            guard let cities = self.seoulCities?.getCity() else { return }
+            
+            let filteredCities = cities.filter { city in
+                // 이 부분에서 City 객체의 'areaNm' 속성과 searchText를 비교하여 필터링합니다.
+                return city.areaNM!.hasPrefix(text)
+            }
+            
+            self.aa.accept(filteredCities)
+        }
+        .disposed(by: disposeBag)
+        
+        
+//        let cities: [City] = [
+//            City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
+//            ,City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
+//
+//           , City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
+//            ,City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
+//           , City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
+//            ,City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
+//
+//            // 다른 도시 데이터
+//        ]
+//
+//        let citySectionModels = [CitySectionModel(header: "Section Header", items: cities)]
+//
+//        self.citiesRelay.accept(citySectionModels)
     }
     
     func getCitiesAPIInfo() {
@@ -88,15 +120,15 @@ class MainViewModel {
         guard let seoulCities = seoulCities?.getCity() else { return }
         viewAll = seoulCities
         for data in seoulCities {
-            if data.Category == "고궁·문화유산" {
+            if data.category == "고궁·문화유산" {
                 culturalheritage.append(data)
-            } else if data.Category == "공원" {
+            } else if data.category == "공원" {
                 park.append(data)
-            } else if data.Category == "관광특구" {
+            } else if data.category == "관광특구" {
                 tourismSpecialZone.append(data)
-            } else if data.Category == "발달상권" {
+            } else if data.category == "발달상권" {
                 centralBusinessDistrict.append(data)
-            } else if data.Category == "인구밀집지역" {
+            } else if data.category == "인구밀집지역" {
                 denselyPopulatedArea.append(data)
             }
         }

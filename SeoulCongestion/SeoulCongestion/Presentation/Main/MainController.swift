@@ -13,13 +13,46 @@ import DropDown
 import RxSwift
 import RxCocoa
 
+import RxDataSources
+
+extension MainController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 {
+            collectionView.snp.remakeConstraints { make in
+                make.top.equalTo(topLogoImageView.snp.top)
+                make.leading.equalTo(view.snp.leading)
+                make.trailing.equalTo(view.snp.trailing)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+                // 다른 제약 설정
+            }
+            // 레이아웃 업데이트
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        } else {
+            collectionView.snp.remakeConstraints { make in
+                make.top.equalTo(dropDownView.snp.bottom)
+                make.leading.equalTo(view.snp.leading)
+                make.trailing.equalTo(view.snp.trailing)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+                // 다른 제약 설정
+            }
+            // 레이아웃 업데이트
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+}
+
+
 class MainController: UIViewController {
   let viewModel = MainViewModel(restProcessor: RestProcessor())
     let disposeBag = DisposeBag()
     
   let topLogoImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "topLogo"))
-    imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFit
     return imageView
   }()
     
@@ -28,6 +61,8 @@ class MainController: UIViewController {
     imageView.contentMode = .scaleAspectFit
     return imageView
   }()
+    
+//    let collectionView1 = UICollectionView()
     
     let collectionView: UICollectionView = {
       let layout = UICollectionViewFlowLayout()
@@ -49,6 +84,27 @@ class MainController: UIViewController {
         viewModel.restProcessor.reqeustDelegate = self
         viewModel.getCitiesAPIInfo()
         setup()
+                
+//        let dataSource = RxCollectionViewSectionedReloadDataSource<CitySectionModel>(
+//            configureCell: { dataSource, collectionView, indexPath, item in
+//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCell.identifier, for: indexPath) as! MainCell
+//                                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
+//                //                let image = UIImage(named: city?[indexPath.item].areaNM ?? "")
+//                let image = UIImage(named: "삼각지역")
+//                imageView.image = image
+//                //
+//                                let gradientViewFrame = imageView.frame;
+//                                imageView.addGradient(frame: gradientViewFrame)
+//                                cell.backgroundView = UIView()
+//                                cell.backgroundView!.addSubview(imageView)               
+//                return cell
+//            })
+//
+//
+//        viewModel.citiesRelay
+//            .bind(to: collectionView.rx.items(dataSource: dataSource))
+//            .disposed(by: disposeBag)
+
     }
     
     private func setup() {
@@ -70,6 +126,7 @@ class MainController: UIViewController {
         view.addSubview(collectionView)
         view.addSubview(emptyView)
         view.addSubview(dropDownView)
+        
         
         topLogoImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(51)
@@ -122,6 +179,13 @@ class MainController: UIViewController {
     }
     
     private func InPutBind() {
+        
+        citySearchTextField.textField.rx.text.orEmpty.throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { searchText in
+                self.viewModel.automaticSearch.accept(searchText)
+            })
+            .disposed(by: disposeBag)
+        
         citySearchTextField.textField.rx.text.orEmpty.subscribe { text in
             self.viewModel.citySearchTextFieldObserver.accept(text)
         }
@@ -134,16 +198,7 @@ class MainController: UIViewController {
     }
     
     private func OutPutBind() {
-        citySearchTextField
-            .searchButton
-            .rx
-            .tap
-            .withLatestFrom(viewModel.citySearchTextFieldOutPutObserver)
-            .subscribe { text in
-                self.viewModel.getCitiesSearchAPI(text)
-            }
-            .disposed(by: disposeBag)
-        
+                
         dropDownView.isDropDownMenuVisible.subscribe { text in
             self.viewModel.dropDownObserver.accept(text)
         }
@@ -159,6 +214,15 @@ class MainController: UIViewController {
         .disposed(by: disposeBag)
         
         viewModel.didSelectTabOutPutObserver.subscribe { city in
+            DispatchQueue.main.async {
+                self.cityCountView.cityCntLabel.text = String(city.count)
+                self.viewModel.seoulCities?.setCity(city: city)
+                self.collectionView.reloadData()
+            }
+        }
+        .disposed(by: disposeBag)
+        
+        viewModel.aa.subscribe { city in
             DispatchQueue.main.async {
                 self.cityCountView.cityCntLabel.text = String(city.count)
                 self.viewModel.seoulCities?.setCity(city: city)

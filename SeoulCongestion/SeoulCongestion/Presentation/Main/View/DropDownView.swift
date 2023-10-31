@@ -53,35 +53,29 @@ class DropDownView: UIView {
     }
     
     private func setup() {
-        addViews()
-        setConstraints()
+        setUI()
         bind()
     }
     
-    private func addViews() {
-        addSubview(dropDownView)
-        addSubview(label)
-        addSubview(arrowImageView)
-    }
-    
-    private func setConstraints() {
-        dropDownView.translatesAutoresizingMaskIntoConstraints = false
-        dropDownView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        dropDownView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        dropDownView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        dropDownView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    func setUI() {
+        [dropDownView ,label ,arrowImageView].forEach { self.addSubview($0) }
         
+        dropDownView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalToSuperview()
+        }
         
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.topAnchor.constraint(equalTo: topAnchor, constant: 5).isActive = true
-        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
-        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 7).isActive = true
-        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -6).isActive = true
+        label.snp.makeConstraints { make in
+            make.top.equalTo(dropDownView.snp.top).offset(5)
+            make.bottom.equalTo(dropDownView.snp.bottom).offset(-5)
+            make.leading.equalTo(dropDownView.snp.leading).offset(7)
+            make.trailing.equalTo(arrowImageView.snp.leading).offset(-60)
+        }
         
-        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
-        arrowImageView.topAnchor.constraint(equalTo: topAnchor, constant: 9).isActive = true
-        arrowImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -11).isActive = true
-        arrowImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        arrowImageView.snp.makeConstraints { make in
+            make.top.equalTo(dropDownView.snp.top).offset(9)
+            make.bottom.equalTo(dropDownView.snp.bottom).offset(-8)
+            make.trailing.equalTo(dropDownView.snp.trailing).offset(-11)
+        }
     }
     
     private func bind() {
