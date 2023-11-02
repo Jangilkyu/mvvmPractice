@@ -52,16 +52,23 @@
 		FE0B03302AF12F9B00107847 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = FE0B032F2AF12F9B00107847 /* RxDataSources */; };
 		FE0B03322AF1328D00107847 /* CitySectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0B03312AF1328D00107847 /* CitySectionModel.swift */; };
 		FE120C2D2A91D2B10074C1B4 /* CityTabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE120C2C2A91D2B10074C1B4 /* CityTabListView.swift */; };
-		FE1EF14729BE087A00FF7113 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1EF14329BE087A00FF7113 /* City.swift */; };
-		FE1EF14829BE087A00FF7113 /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1EF14429BE087A00FF7113 /* Cities.swift */; };
-		FE1EF14929BE087A00FF7113 /* SearchCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1EF14529BE087A00FF7113 /* SearchCities.swift */; };
+		FE1EF14729BE087A00FF7113 /* CitiesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1EF14329BE087A00FF7113 /* CitiesDTO.swift */; };
+		FE1EF14929BE087A00FF7113 /* SearchCitiesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1EF14529BE087A00FF7113 /* SearchCitiesDTO.swift */; };
 		FE1EF14A29BE087A00FF7113 /* SeoulCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1EF14629BE087A00FF7113 /* SeoulCities.swift */; };
 		FE335FDF2ADA1BFC0010A7B2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FE335FDE2ADA1BFC0010A7B2 /* SnapKit */; };
 		FE335FE12ADA1BFC0010A7B2 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = FE335FE02ADA1BFC0010A7B2 /* SnapKit-Dynamic */; };
+		FE59B8842AF26FAD00571680 /* BikeRentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE59B8832AF26FAD00571680 /* BikeRentViewController.swift */; };
 		FE74021E29814B510014629A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE74021D29814B510014629A /* AppDelegate.swift */; };
 		FE74022029814B510014629A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE74021F29814B510014629A /* SceneDelegate.swift */; };
 		FE74022729814B520014629A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE74022629814B520014629A /* Assets.xcassets */; };
 		FE74022A29814B520014629A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE74022829814B520014629A /* LaunchScreen.storyboard */; };
+		FE75E0232AF3DE32005F1890 /* CitiesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75E0222AF3DE32005F1890 /* CitiesUseCase.swift */; };
+		FE75E0262AF3E076005F1890 /* CitiesUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75E0252AF3E076005F1890 /* CitiesUseCaseImpl.swift */; };
+		FE75E0282AF3ED8C005F1890 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75E0272AF3ED8C005F1890 /* APIHandler.swift */; };
+		FE75E02B2AF3EE68005F1890 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = FE75E02A2AF3EE68005F1890 /* CombineMoya */; };
+		FE75E02D2AF3EE68005F1890 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = FE75E02C2AF3EE68005F1890 /* Moya */; };
+		FE75E02F2AF3EE68005F1890 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = FE75E02E2AF3EE68005F1890 /* ReactiveMoya */; };
+		FE75E0312AF3EE68005F1890 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = FE75E0302AF3EE68005F1890 /* RxMoya */; };
 		FE9121802A920D5E00C08B45 /* CityTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE91217F2A920D5E00C08B45 /* CityTab.swift */; };
 		FE9121822A9256CE00C08B45 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9121812A9256CE00C08B45 /* Extension+UIImage.swift */; };
 		FEA02EBC2AE4C93200280DA3 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = FEA02EBB2AE4C93200280DA3 /* RxGesture */; };
@@ -118,16 +125,19 @@
 		FE06CBEB29BDDAE7003297E9 /* SCFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCFont.swift; sourceTree = "<group>"; };
 		FE0B03312AF1328D00107847 /* CitySectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySectionModel.swift; sourceTree = "<group>"; };
 		FE120C2C2A91D2B10074C1B4 /* CityTabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTabListView.swift; sourceTree = "<group>"; };
-		FE1EF14329BE087A00FF7113 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
-		FE1EF14429BE087A00FF7113 /* Cities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cities.swift; sourceTree = "<group>"; };
-		FE1EF14529BE087A00FF7113 /* SearchCities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCities.swift; sourceTree = "<group>"; };
+		FE1EF14329BE087A00FF7113 /* CitiesDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesDTO.swift; sourceTree = "<group>"; };
+		FE1EF14529BE087A00FF7113 /* SearchCitiesDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCitiesDTO.swift; sourceTree = "<group>"; };
 		FE1EF14629BE087A00FF7113 /* SeoulCities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeoulCities.swift; sourceTree = "<group>"; };
+		FE59B8832AF26FAD00571680 /* BikeRentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeRentViewController.swift; sourceTree = "<group>"; };
 		FE74021A29814B510014629A /* SeoulCongestion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeoulCongestion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE74021D29814B510014629A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE74021F29814B510014629A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FE74022629814B520014629A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE74022929814B520014629A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE74022B29814B520014629A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE75E0222AF3DE32005F1890 /* CitiesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesUseCase.swift; sourceTree = "<group>"; };
+		FE75E0252AF3E076005F1890 /* CitiesUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesUseCaseImpl.swift; sourceTree = "<group>"; };
+		FE75E0272AF3ED8C005F1890 /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
 		FE91217F2A920D5E00C08B45 /* CityTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTab.swift; sourceTree = "<group>"; };
 		FE9121812A9256CE00C08B45 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		FEA773AB29CB43C30095B8FE /* RatioLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioLabelView.swift; sourceTree = "<group>"; };
@@ -145,11 +155,15 @@
 				FE335FE12ADA1BFC0010A7B2 /* SnapKit-Dynamic in Frameworks */,
 				FE06CBFE29BDE11C003297E9 /* SkeletonView in Frameworks */,
 				FE335FDF2ADA1BFC0010A7B2 /* SnapKit in Frameworks */,
+				FE75E02F2AF3EE68005F1890 /* ReactiveMoya in Frameworks */,
 				FE0B032E2AF12F9B00107847 /* Differentiator in Frameworks */,
 				FEDAD7922AA95F440057A99F /* DropDown in Frameworks */,
 				FEA02EBC2AE4C93200280DA3 /* RxGesture in Frameworks */,
+				FE75E02D2AF3EE68005F1890 /* Moya in Frameworks */,
 				FEA02EC52AE4C93900280DA3 /* RxCocoa-Dynamic in Frameworks */,
 				FE06CBF829BDDBE3003297E9 /* Lottie in Frameworks */,
+				FE75E0312AF3EE68005F1890 /* RxMoya in Frameworks */,
+				FE75E02B2AF3EE68005F1890 /* CombineMoya in Frameworks */,
 				FEA02EBF2AE4C93900280DA3 /* RxBlocking in Frameworks */,
 				FEA02EC12AE4C93900280DA3 /* RxBlocking-Dynamic in Frameworks */,
 				FEA02EC72AE4C93900280DA3 /* RxRelay in Frameworks */,
@@ -195,13 +209,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		FE06CBB929BDDABF003297E9 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		FE06CBBA29BDDABF003297E9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +250,7 @@
 		FE06CBE329BDDAE7003297E9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				FE06CB4029BDD686003297E9 /* lottie */,
 				FE06CB8B29BDD6CC003297E9 /* Fonts */,
 				FE91217E2A920D2400C08B45 /* Constants */,
 				FE06CBE529BDDAE7003297E9 /* Extension */,
@@ -265,16 +273,13 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		FE1EF14229BE087A00FF7113 /* Model */ = {
+		FE1EF14229BE087A00FF7113 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				FE1EF14429BE087A00FF7113 /* Cities.swift */,
-				FE1EF14329BE087A00FF7113 /* City.swift */,
-				FE1EF14529BE087A00FF7113 /* SearchCities.swift */,
 				FE1EF14629BE087A00FF7113 /* SeoulCities.swift */,
 				FE0B03312AF1328D00107847 /* CitySectionModel.swift */,
 			);
-			path = Model;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		FE335FE22ADA1C260010A7B2 /* Cell */ = {
@@ -288,8 +293,9 @@
 		FE37B50D2AEE298100204117 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				FE37B5112AEE2D9300204117 /* Bike */,
 				FEB09E3E2AD6C13800CD4949 /* Main */,
+				FE06CBD129BDDABF003297E9 /* MainNavigationController.swift */,
+				FE37B5112AEE2D9300204117 /* Bike */,
 				FE37B50F2AEE2C4900204117 /* Detail */,
 			);
 			path = Presentation;
@@ -304,6 +310,7 @@
 				FE120C2C2A91D2B10074C1B4 /* CityTabListView.swift */,
 				FEDAD7932AA962F20057A99F /* DropDownView.swift */,
 				FE335FE22ADA1C260010A7B2 /* Cell */,
+				FE59B8832AF26FAD00571680 /* BikeRentViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,6 +343,40 @@
 			path = Bike;
 			sourceTree = "<group>";
 		};
+		FE59B8862AF290B600571680 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				FE59B8882AF291AB00571680 /* Network */,
+				FE75E0212AF3DDFC005F1890 /* UseCases */,
+				FE75E0272AF3ED8C005F1890 /* APIHandler.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		FE59B8872AF290BC00571680 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FE59B8882AF291AB00571680 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FE59B88B2AF291E500571680 /* DataMapping */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FE59B88B2AF291E500571680 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				FE1EF14329BE087A00FF7113 /* CitiesDTO.swift */,
+				FE1EF14529BE087A00FF7113 /* SearchCitiesDTO.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
 		FE74021129814B510014629A = {
 			isa = PBXGroup;
 			children = (
@@ -355,18 +396,33 @@
 		FE74021C29814B510014629A /* SeoulCongestion */ = {
 			isa = PBXGroup;
 			children = (
-				FE06CBD129BDDABF003297E9 /* MainNavigationController.swift */,
-				FE74022B29814B520014629A /* Info.plist */,
+				FEDF9EBE2AEE289A0081BEEC /* Application */,
+				FE59B8872AF290BC00571680 /* Network */,
+				FE59B8862AF290B600571680 /* Domain */,
 				FEDF9EBF2AEE28AE0081BEEC /* Resources */,
 				FE37B50D2AEE298100204117 /* Presentation */,
-				FEDF9EBE2AEE289A0081BEEC /* Application */,
-				FE1EF14229BE087A00FF7113 /* Model */,
+				FE1EF14229BE087A00FF7113 /* Entities */,
 				FE06CBE329BDDAE7003297E9 /* Util */,
-				FE06CBB929BDDABF003297E9 /* Controllers */,
-				FE06CB4029BDD686003297E9 /* lottie */,
 				FE06CB8229BDD698003297E9 /* API */,
 			);
 			path = SeoulCongestion;
+			sourceTree = "<group>";
+		};
+		FE75E0212AF3DDFC005F1890 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				FE75E0242AF3DE35005F1890 /* Protocol */,
+				FE75E0252AF3E076005F1890 /* CitiesUseCaseImpl.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		FE75E0242AF3DE35005F1890 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				FE75E0222AF3DE32005F1890 /* CitiesUseCase.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		FE91217E2A920D2400C08B45 /* Constants */ = {
@@ -381,8 +437,8 @@
 			isa = PBXGroup;
 			children = (
 				FE37B50E2AEE29AA00204117 /* View */,
-				FE06CBC729BDDABF003297E9 /* MainController.swift */,
 				FEB09E3F2AD6C13F00CD4949 /* ViewModel */,
+				FE06CBC729BDDABF003297E9 /* MainController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -407,6 +463,7 @@
 		FEDF9EBF2AEE28AE0081BEEC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FE74022B29814B520014629A /* Info.plist */,
 				FE74022829814B520014629A /* LaunchScreen.storyboard */,
 				FE74022629814B520014629A /* Assets.xcassets */,
 			);
@@ -443,6 +500,10 @@
 				FEA02EC62AE4C93900280DA3 /* RxRelay */,
 				FE0B032D2AF12F9B00107847 /* Differentiator */,
 				FE0B032F2AF12F9B00107847 /* RxDataSources */,
+				FE75E02A2AF3EE68005F1890 /* CombineMoya */,
+				FE75E02C2AF3EE68005F1890 /* Moya */,
+				FE75E02E2AF3EE68005F1890 /* ReactiveMoya */,
+				FE75E0302AF3EE68005F1890 /* RxMoya */,
 			);
 			productName = SeoulCongestion;
 			productReference = FE74021A29814B510014629A /* SeoulCongestion.app */;
@@ -480,6 +541,7 @@
 				FEA02EBA2AE4C93200280DA3 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				FEA02EBD2AE4C93900280DA3 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				FE0B032C2AF12F9B00107847 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				FE75E0292AF3EE68005F1890 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = FE74021B29814B510014629A /* Products */;
 			projectDirPath = "";
@@ -524,10 +586,11 @@
 				FE06CBE029BDDABF003297E9 /* CityCountView.swift in Sources */,
 				FE74021E29814B510014629A /* AppDelegate.swift in Sources */,
 				FE06CBED29BDDAE7003297E9 /* Extension+UITextField.swift in Sources */,
-				FE1EF14829BE087A00FF7113 /* Cities.swift in Sources */,
 				FE06CBDA29BDDABF003297E9 /* MainController.swift in Sources */,
 				FE06CBDF29BDDABF003297E9 /* AreaCongestLvlView.swift in Sources */,
 				FE06CBF229BDDAE7003297E9 /* SCFont.swift in Sources */,
+				FE75E0262AF3E076005F1890 /* CitiesUseCaseImpl.swift in Sources */,
+				FE59B8842AF26FAD00571680 /* BikeRentViewController.swift in Sources */,
 				FE9121802A920D5E00C08B45 /* CityTab.swift in Sources */,
 				FE06CBD829BDDABF003297E9 /* AvailableBikeCountView.swift in Sources */,
 				FE06CBE129BDDABF003297E9 /* CitySearchTextField.swift in Sources */,
@@ -541,6 +604,7 @@
 				FEDAD7942AA962F20057A99F /* DropDownView.swift in Sources */,
 				FE06CBD429BDDABF003297E9 /* RoadCongestionCell.swift in Sources */,
 				FE06CBEE29BDDAE7003297E9 /* Extension+String.swift in Sources */,
+				FE75E0232AF3DE32005F1890 /* CitiesUseCase.swift in Sources */,
 				FE06CBD729BDDABF003297E9 /* BikeAverageUtilizationRateView.swift in Sources */,
 				FE06CBE229BDDABF003297E9 /* MainNavigationController.swift in Sources */,
 				FE06CBDB29BDDABF003297E9 /* CityDetailController.swift in Sources */,
@@ -552,11 +616,12 @@
 				FE06CBF029BDDAE7003297E9 /* Extension+UIview.swift in Sources */,
 				FE06CB8729BDD698003297E9 /* RestProcessor.swift in Sources */,
 				FE0B03322AF1328D00107847 /* CitySectionModel.swift in Sources */,
-				FE1EF14929BE087A00FF7113 /* SearchCities.swift in Sources */,
+				FE1EF14929BE087A00FF7113 /* SearchCitiesDTO.swift in Sources */,
 				FE06CBDD29BDDABF003297E9 /* RoadTrafficView.swift in Sources */,
 				FE06CB8829BDD698003297E9 /* RestProcessor+Model.swift in Sources */,
 				FE06CBD929BDDABF003297E9 /* BikeInfoController.swift in Sources */,
-				FE1EF14729BE087A00FF7113 /* City.swift in Sources */,
+				FE1EF14729BE087A00FF7113 /* CitiesDTO.swift in Sources */,
+				FE75E0282AF3ED8C005F1890 /* APIHandler.swift in Sources */,
 				FEB09E412AD6C14B00CD4949 /* MainViewModel.swift in Sources */,
 				FE06CBEC29BDDAE7003297E9 /* SCColor.swift in Sources */,
 			);
@@ -701,7 +766,7 @@
 				CURRENT_PROJECT_VERSION = 1.1.8;
 				DEVELOPMENT_TEAM = BMBM6CH9KR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SeoulCongestion/Info.plist;
+				INFOPLIST_FILE = SeoulCongestion/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -731,7 +796,7 @@
 				CURRENT_PROJECT_VERSION = 1.1.8;
 				DEVELOPMENT_TEAM = BMBM6CH9KR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SeoulCongestion/Info.plist;
+				INFOPLIST_FILE = SeoulCongestion/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -808,6 +873,14 @@
 				minimumVersion = 5.6.0;
 			};
 		};
+		FE75E0292AF3EE68005F1890 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
 		FEA02EBA2AE4C93200280DA3 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture";
@@ -864,6 +937,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FE335FDD2ADA1BFC0010A7B2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		FE75E02A2AF3EE68005F1890 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE75E0292AF3EE68005F1890 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		FE75E02C2AF3EE68005F1890 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE75E0292AF3EE68005F1890 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		FE75E02E2AF3EE68005F1890 /* ReactiveMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE75E0292AF3EE68005F1890 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = ReactiveMoya;
+		};
+		FE75E0302AF3EE68005F1890 /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE75E0292AF3EE68005F1890 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
 		};
 		FEA02EBB2AE4C93200280DA3 /* RxGesture */ = {
 			isa = XCSwiftPackageProductDependency;

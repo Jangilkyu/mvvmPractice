@@ -57,7 +57,7 @@ class CityDetailController: UIViewController {
     backButton()
   }
   
-  convenience init(_ city: City? = nil) {
+  convenience init(_ city: CitiesDTO? = nil) {
     self.init()
     guard let city = city else { return }
     livePpltnStts = city.livePpltnStts

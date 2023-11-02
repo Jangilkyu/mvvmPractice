@@ -13,7 +13,7 @@ import RxGesture
 
 class DropDownView: UIView {
     
-    var citiesData: [City] = []
+    var citiesData: [CitiesDTO] = []
     let disposeBag = DisposeBag()
     let isDropDownMenuVisible = PublishRelay<String>()
     

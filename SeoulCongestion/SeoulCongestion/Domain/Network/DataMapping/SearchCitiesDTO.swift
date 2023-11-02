@@ -1,5 +1,5 @@
 //
-//  SearchCities.swift
+//  SearchCitiesDTO.swift
 //  SeoulCongestion
 //
 //  Created by jangilkyu on 2023/02/18.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SearchCities: Codable {
+struct SearchCitiesDTO: Codable {
     let livePpltnStts: LivePpltnStts
     let avgRoadData: AvgRoadData
     let sbikeStts: [SbikeStts]?

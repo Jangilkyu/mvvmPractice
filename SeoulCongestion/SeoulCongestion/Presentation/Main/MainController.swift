@@ -156,7 +156,7 @@ class MainController: UIViewController {
         
         cityCountView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(40)
-            make.top.equalTo(cityTabListView.snp.bottom).offset(40)
+//            make.top.equalTo(cityTabListView.snp.bottom).offset(40)
         }
 
         collectionView.snp.makeConstraints { make in
@@ -395,7 +395,7 @@ extension MainController: RestProcessorRequestDelegate {
         switch viewModel.resHandler?.getResult() {
       case .ok(_, let data):
         if let data = data,
-           let citiesData = try? JSONDecoder().decode([City].self, from: data) {
+           let citiesData = try? JSONDecoder().decode([CitiesDTO].self, from: data) {
             self.viewModel.seoulCities?.setCity(city: citiesData)
           
             guard let tot = self.viewModel.seoulCities?.cities[0].cities?.count else { return }

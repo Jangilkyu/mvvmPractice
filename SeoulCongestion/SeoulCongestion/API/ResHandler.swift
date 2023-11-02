@@ -33,7 +33,7 @@ class ResHandler {
     guard let statusCode = res.response?.httpStatusCode else { return nil }
     if let data = res.data {
       let json = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments])
-      print("json! :: \(json!)")
+//      print("json! :: \(json!)")
     }
     // 1. Process status codes first
     if statusCode == 200 {

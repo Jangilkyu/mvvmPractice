@@ -14,11 +14,11 @@ class SeoulCities {
     self.cities = cities
   }
   
-  func getCity() -> [City]? {
+  func getCity() -> [CitiesDTO]? {
     return cities[0].cities
   }
   
-  func setCity(city: [City]?) {
+  func setCity(city: [CitiesDTO]?) {
     self.cities[0].cities = city
   }
   
@@ -30,7 +30,7 @@ class SeoulCities {
     return 0
   }
   
-  func getOneCenter(at indexPath: IndexPath) -> City? {
+  func getOneCenter(at indexPath: IndexPath) -> CitiesDTO? {
       guard let cities = self.getCity(), indexPath.row < cities.count else {
           print("Error: Invalid index path or empty city list")
           return nil

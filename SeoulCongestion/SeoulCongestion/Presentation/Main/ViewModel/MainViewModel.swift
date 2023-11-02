@@ -19,27 +19,27 @@ class MainViewModel {
     public var citySearchTextFieldObserver = PublishRelay<String>()
     public var citySearchTextFieldOutPutObserver = PublishRelay<String>()
     public var automaticSearch = BehaviorRelay<String>(value: "")
-    public var aa = PublishRelay<[City]>()
+    public var aa = PublishRelay<[CitiesDTO]>()
     
     public var cityTabListObserver = PublishRelay<CityTab>()
     public var dropDownObserver = PublishRelay<String>()
-    public var sortCitiesByAlphabetOutputObserver = PublishRelay<[City]>()
+    public var sortCitiesByAlphabetOutputObserver = PublishRelay<[CitiesDTO]>()
     public var didSelectTabObserver = PublishRelay<CityTab>()
-    public var didSelectTabOutPutObserver = PublishRelay<[City]>()
+    public var didSelectTabOutPutObserver = PublishRelay<[CitiesDTO]>()
     public var citiesRelay = BehaviorRelay<[CitySectionModel]>(value: [])
 
     /// 전체보기
-    var viewAll: [City] = []
+    var viewAll: [CitiesDTO] = []
     /// 고궁 · 문화유산
-    var culturalheritage: [City] = []
+    var culturalheritage: [CitiesDTO] = []
     /// 공원
-    var park: [City] = []
+    var park: [CitiesDTO] = []
     /// 관광특구
-    var tourismSpecialZone: [City] = []
+    var tourismSpecialZone: [CitiesDTO] = []
     /// 발달상권
-    var centralBusinessDistrict: [City] = []
+    var centralBusinessDistrict: [CitiesDTO] = []
     /// 인구밀집지역
-    var denselyPopulatedArea: [City] = []
+    var denselyPopulatedArea: [CitiesDTO] = []
     
     init(restProcessor: RestProcessor) {
         self.restProcessor = restProcessor
@@ -136,10 +136,10 @@ class MainViewModel {
     
     func updateCollectionViewWithSelectedString(
       _ selectedString: String,
-      _ cities: [City]? = nil
+      _ cities: [CitiesDTO]? = nil
     ) {
         guard let cities = cities else { return }
-        let citiesToUse: [City] = cities
+        let citiesToUse: [CitiesDTO] = cities
 
       if selectedString == "가나다 순" {
           let alphabeticalSorted = self.sortCitiesByAlphabet(citiesToUse)
@@ -150,7 +150,7 @@ class MainViewModel {
     }
     
     func sortCitiesByAlphabet(
-      _ cities: [City]) -> [City] {
+      _ cities: [CitiesDTO]) -> [CitiesDTO] {
       return cities.sorted { city1, city2 in
         if let city1 = city1.areaNM, let city2 = city2.areaNM {
           return city1.localizedCompare(city2) == .orderedAscending
@@ -159,7 +159,7 @@ class MainViewModel {
       }
     }
     
-    func didSelectTab(_ tab: CityTab) -> [City] {
+    func didSelectTab(_ tab: CityTab) -> [CitiesDTO] {
         switch tab {
         case .viewAll:
             return self.viewAll
