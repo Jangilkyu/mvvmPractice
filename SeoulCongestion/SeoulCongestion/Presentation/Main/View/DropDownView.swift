@@ -17,7 +17,7 @@ class DropDownView: UIView {
     let disposeBag = DisposeBag()
     let isDropDownMenuVisible = PublishRelay<String>()
     
-    weak var mainController: MainController?
+    weak var mainController: CityListViewController?
     
     let dropDownView: UIView = {
         let view = UIView()

@@ -1,5 +1,5 @@
 //
-//  MainController.swift
+//  CityListViewController.swift
 //  SeoulCongestion
 //
 //  Created by jangilkyu on 2023/01/25.
@@ -13,42 +13,22 @@ import DropDown
 import RxSwift
 import RxCocoa
 
-import RxDataSources
-
-extension MainController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0 {
-            collectionView.snp.remakeConstraints { make in
-                make.top.equalTo(topLogoImageView.snp.top)
-                make.leading.equalTo(view.snp.leading)
-                make.trailing.equalTo(view.snp.trailing)
-                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-                // 다른 제약 설정
-            }
-            // 레이아웃 업데이트
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
-        } else {
-            collectionView.snp.remakeConstraints { make in
-                make.top.equalTo(dropDownView.snp.bottom)
-                make.leading.equalTo(view.snp.leading)
-                make.trailing.equalTo(view.snp.trailing)
-                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-                // 다른 제약 설정
-            }
-            // 레이아웃 업데이트
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
-        }
-    }
-}
-
-
-class MainController: UIViewController {
-  let viewModel = MainViewModel(restProcessor: RestProcessor())
+class CityListViewController: UIViewController {
+    
+    let citiesUseCase: CitiesUseCase
+    let viewModel: CitiesViewModel
     let disposeBag = DisposeBag()
+
+    init(citiesUseCase: CitiesUseCase, viewModel: CitiesViewModel) {
+        self.citiesUseCase = citiesUseCase
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
   let topLogoImageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "topLogo"))
@@ -61,8 +41,7 @@ class MainController: UIViewController {
     imageView.contentMode = .scaleAspectFit
     return imageView
   }()
-    
-//    let collectionView1 = UICollectionView()
+
     
     let collectionView: UICollectionView = {
       let layout = UICollectionViewFlowLayout()
@@ -81,41 +60,19 @@ class MainController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.restProcessor.reqeustDelegate = self
-        viewModel.getCitiesAPIInfo()
+        citiesUseCase.requestCities()
         setup()
-                
-//        let dataSource = RxCollectionViewSectionedReloadDataSource<CitySectionModel>(
-//            configureCell: { dataSource, collectionView, indexPath, item in
-//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCell.identifier, for: indexPath) as! MainCell
-//                                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
-//                //                let image = UIImage(named: city?[indexPath.item].areaNM ?? "")
-//                let image = UIImage(named: "삼각지역")
-//                imageView.image = image
-//                //
-//                                let gradientViewFrame = imageView.frame;
-//                                imageView.addGradient(frame: gradientViewFrame)
-//                                cell.backgroundView = UIView()
-//                                cell.backgroundView!.addSubview(imageView)               
-//                return cell
-//            })
-//
-//
-//        viewModel.citiesRelay
-//            .bind(to: collectionView.rx.items(dataSource: dataSource))
-//            .disposed(by: disposeBag)
-
     }
     
     private func setup() {
         view.backgroundColor = .white
         configureCollectionView()
         configureSkeletonView()
-        configureSearchButton()
         setUI()
         InPutBind()
         OutPutBind()
     }
+    
 
     private func setUI() {
         view.addSubview(topLogoImageView)
@@ -156,7 +113,6 @@ class MainController: UIViewController {
         
         cityCountView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(40)
-//            make.top.equalTo(cityTabListView.snp.bottom).offset(40)
         }
 
         collectionView.snp.makeConstraints { make in
@@ -186,6 +142,12 @@ class MainController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        citySearchTextField.searchButton.rx.tap.subscribe { a in
+            guard let text = self.citySearchTextField.textField.text else { return }
+            self.viewModel.bb.accept(text)
+        }
+        .disposed(by: disposeBag)
+
         citySearchTextField.textField.rx.text.orEmpty.subscribe { text in
             self.viewModel.citySearchTextFieldObserver.accept(text)
         }
@@ -198,6 +160,11 @@ class MainController: UIViewController {
     }
     
     private func OutPutBind() {
+        
+        viewModel.citySearchTextFieldOutPutObserver.subscribe { text in
+            print(text)
+        }
+        .disposed(by: disposeBag)
                 
         dropDownView.isDropDownMenuVisible.subscribe { text in
             self.viewModel.dropDownObserver.accept(text)
@@ -230,12 +197,40 @@ class MainController: UIViewController {
             }
         }
         .disposed(by: disposeBag)
+        
+        self.viewModel.cc.subscribe { filteredCities in
+            self.viewModel.seoulCities?.setCity(city: filteredCities)
+            guard let tot = self.viewModel.seoulCities?.cities[0].cities?.count else { return }
+
+          DispatchQueue.main.async {
+            self.citySearchTextField.buttonState = .success
+            self.cityCountView.cityCntLabel.text = String(tot)
+            self.citySearchTextField.textField.isEnabled = true
+            self.collectionView.reloadData()
+          }
+        }
+        .disposed(by: disposeBag)
+        
+        self.citiesUseCase.citiesList.subscribe { citiesData in
+            self.viewModel.seoulCities = SeoulCities(citiesData)
+            guard let tot = self.viewModel.seoulCities?.cities[0].cities?.count else { return }
+            self.viewModel.categorizeCities()
+                      DispatchQueue.main.async {
+                        self.cityCountView.cityCntLabel.text = String(tot)
+                        self.collectionView.reloadData()
+                        self.collectionView.hideSkeleton()
+                        self.citySearchTextField.textField.isEnabled = true
+                        self.cityTabListView.enableAllTabButtons()
+                      }
+
+        }
+        .disposed(by: disposeBag)
     }
-      
+    
   private func configureCollectionView() {
     collectionView.delegate = self
     collectionView.dataSource = self
-      collectionView.register(MainCell.self, forCellWithReuseIdentifier: MainCell.identifier)
+    collectionView.register(MainCell.self, forCellWithReuseIdentifier: MainCell.identifier)
   }
   
   private func configureSkeletonView() {
@@ -244,43 +239,16 @@ class MainController: UIViewController {
     self.collectionView.showAnimatedGradientSkeleton(usingGradient: .init(colors: [.lightGray, .gray]), animation: skeletonAnimation, transition: .none)
   }
   
-  private func configureSearchButton() {
-    citySearchTextField.searchButton.addTarget(
-      self,
-      action: #selector(handleSearchButton),
-      for: .touchUpInside
-    )
-  }
-  
-  @objc func handleSearchButton() {
-      guard let searchCity = self.citySearchTextField.textField.text?.trimmingCharacters(in: .whitespaces) else { return }
-      
-      if searchCity.count == 0 {
-        DispatchQueue.main.async {
-          let alert = UIAlertController(title: nil, message: "지역을 입력 해주세요.", preferredStyle: .alert)
-          let okAction = UIAlertAction(title: "확인", style: .cancel)
-          alert.addAction(okAction)
-          self.present(alert, animated: false, completion: nil)
-        }
-          return
-      }
-      
-      self.citySearchTextField.buttonState = .loading
-      self.citySearchTextField.textField.isEnabled = false
-      viewModel.getCitiesSearchAPI(searchCity)
-  }
-  
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
   }
-
 }
 
-extension MainController: UICollectionViewDelegate {
+extension CityListViewController: UICollectionViewDelegate {
   
 }
 
-extension MainController: SkeletonCollectionViewDataSource {
+extension CityListViewController: SkeletonCollectionViewDataSource {
   func collectionView(
     _ collectionView: UICollectionView,
     numberOfItemsInSection section: Int
@@ -352,7 +320,7 @@ extension MainController: SkeletonCollectionViewDataSource {
   }
 }
 
-extension MainController: UICollectionViewDelegateFlowLayout {
+extension CityListViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(
     _ collecitonView: UICollectionView,
     layout collectionVIewLayout: UICollectionViewLayout,
@@ -362,70 +330,48 @@ extension MainController: UICollectionViewDelegateFlowLayout {
   }
 }
 
-extension MainController: RestProcessorRequestDelegate {
-
-  func didReceiveResponseFromDataTask(
-    _ result: RestProcessor.Results,
-    _ usage: EndPoint
-  ) {
-      viewModel.resHandler = ResHandler(result: result)
-    if (usage == .seoulCitiesData) {
-        switch viewModel.resHandler?.getResult() {
-      case .ok(_, let data):
-        if let data = data,
-           let citiesData = try? JSONDecoder().decode([Cities].self, from: data) {
-            self.viewModel.seoulCities = SeoulCities(citiesData)
-            guard let tot = self.viewModel.seoulCities?.cities[0].cities?.count else { return }
-          
-            viewModel.categorizeCities()
-          
-          DispatchQueue.main.async {
-            self.cityCountView.cityCntLabel.text = String(tot)
-            self.collectionView.reloadData()
-            self.collectionView.hideSkeleton()
-            self.citySearchTextField.textField.isEnabled = true
-            self.cityTabListView.enableAllTabButtons()
-          }
-        }
-        
-      default:
-        break
-      }
-    } else if (usage == .search) {
-        switch viewModel.resHandler?.getResult() {
-      case .ok(_, let data):
-        if let data = data,
-           let citiesData = try? JSONDecoder().decode([CitiesDTO].self, from: data) {
-            self.viewModel.seoulCities?.setCity(city: citiesData)
-          
-            guard let tot = self.viewModel.seoulCities?.cities[0].cities?.count else { return }
-          
-          DispatchQueue.main.async {
-            self.citySearchTextField.buttonState = .success
-            self.cityCountView.cityCntLabel.text = String(tot)
-            self.citySearchTextField.textField.isEnabled = true
-            self.collectionView.reloadData()
-          }
-        }
-        
-      default:
-        break
-      }
-    }
-  }
-  
-  func didFailToPrepareRequest(
-    _ result: RestProcessor.Results,
-    _ usage: EndPoint
-  ) {
-    
-  }
-}
-
-extension MainController: UITextFieldDelegate {
+extension CityListViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //      viewModel.getCitiesSearchAPI()
       textField.resignFirstResponder()
       return true
   }
+}
+
+extension CityListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 {
+            collectionView.snp.remakeConstraints { make in
+                make.top.equalTo(topLogoImageView.snp.top)
+                make.leading.equalTo(view.snp.leading)
+                make.trailing.equalTo(view.snp.trailing)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            }
+
+            UIView.animate(withDuration: 0.3) {
+                self.topLogoImageView.alpha = 0
+                self.leftLogoImageView.alpha = 0
+                self.citySearchTextField.alpha = 0
+                self.cityCountView.alpha = 0
+                self.dropDownView.alpha = 0
+                self.view.layoutIfNeeded()
+            }
+        } else {
+            collectionView.snp.remakeConstraints { make in
+                make.top.equalTo(dropDownView.snp.bottom).offset(10)
+                make.leading.equalTo(view.snp.leading)
+                make.trailing.equalTo(view.snp.trailing)
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            }
+            
+            UIView.animate(withDuration: 0.3) {
+                self.topLogoImageView.alpha = 1
+                self.leftLogoImageView.alpha = 1
+                self.citySearchTextField.alpha = 1
+                self.cityCountView.alpha = 1
+                self.dropDownView.alpha = 1
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
 }

@@ -45,3 +45,19 @@ extension APIHandler: TargetType {
         return [:]
     }
 }
+
+
+class CitiesProvider {
+    static let shared = CitiesProvider()
+
+    private let provider: MoyaProvider<APIHandler>
+    
+    private init() {
+        provider = MoyaProvider<APIHandler>()
+    }
+
+    func getMoyaProvider() -> MoyaProvider<APIHandler> {
+        return provider
+    }
+}
+

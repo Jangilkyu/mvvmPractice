@@ -8,9 +8,10 @@
 import Foundation
 import RxRelay
 import RxSwift
-
+import Moya
 
 protocol CitiesUseCase {
-    var citiesList: PublishRelay<[CitiesDTO]> { get set }
+    var provider: MoyaProvider<APIHandler> { get }
+    var citiesList: PublishRelay<[Cities]> { get set }
     func requestCities()
 }

@@ -9,12 +9,26 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxRelay
+import Moya
 
 class CitiesUseCaseImpl: CitiesUseCase {
+    let provider: MoyaProvider<APIHandler>
+    var citiesList = PublishRelay<[Cities]>()
     
-    var citiesList = PublishRelay<[CitiesDTO]>()
+    init(provider: MoyaProvider<APIHandler>) {
+        self.provider = provider
+    }
     
     func requestCities() {
-        print("requestCities")
+        provider.request(.seoulCitiesData) { result in
+            switch result {
+            case .success(let res):
+                guard let cities = try? JSONDecoder().decode([Cities].self, from: res.data) else { return }
+                self.citiesList.accept(cities)
+            case .failure(let error):
+                print(error)
+//                completion(.failure(error))
+            }
+        }
     }
 }

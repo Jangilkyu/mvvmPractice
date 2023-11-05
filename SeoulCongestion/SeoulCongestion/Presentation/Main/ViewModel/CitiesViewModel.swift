@@ -1,5 +1,5 @@
 //
-//  MainViewModel.swift
+//  CitiesViewModel.swift
 //  SeoulCongestion
 //
 //  Created by jangilkyu on 2023/10/15.
@@ -9,10 +9,8 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class MainViewModel {
+class CitiesViewModel {
     var seoulCities: SeoulCities?
-    var resHandler: ResHandler?
-    var restProcessor: RestProcessor
     
     var disposeBag = DisposeBag()
     
@@ -20,6 +18,7 @@ class MainViewModel {
     public var citySearchTextFieldOutPutObserver = PublishRelay<String>()
     public var automaticSearch = BehaviorRelay<String>(value: "")
     public var aa = PublishRelay<[CitiesDTO]>()
+    public var cc = PublishRelay<[CitiesDTO]>()
     
     public var cityTabListObserver = PublishRelay<CityTab>()
     public var dropDownObserver = PublishRelay<String>()
@@ -27,6 +26,7 @@ class MainViewModel {
     public var didSelectTabObserver = PublishRelay<CityTab>()
     public var didSelectTabOutPutObserver = PublishRelay<[CitiesDTO]>()
     public var citiesRelay = BehaviorRelay<[CitySectionModel]>(value: [])
+    public var bb = PublishRelay<String>()
 
     /// 전체보기
     var viewAll: [CitiesDTO] = []
@@ -41,12 +41,24 @@ class MainViewModel {
     /// 인구밀집지역
     var denselyPopulatedArea: [CitiesDTO] = []
     
-    init(restProcessor: RestProcessor) {
-        self.restProcessor = restProcessor
+    init() {
         bind()
     }
     
     func bind() {
+        
+        bb.subscribe { text in
+            guard let cities = self.seoulCities?.getCity() else { return }
+            
+            let filteredCities = cities.filter { city in
+                return city.areaNM!.hasPrefix(text)
+            }
+            
+            
+            self.cc.accept(filteredCities)
+        }
+        .disposed(by: disposeBag)
+        
         citySearchTextFieldObserver.subscribe { text in
             self.citySearchTextFieldOutPutObserver.accept(text)
         }
@@ -68,54 +80,14 @@ class MainViewModel {
             guard let cities = self.seoulCities?.getCity() else { return }
             
             let filteredCities = cities.filter { city in
-                // 이 부분에서 City 객체의 'areaNm' 속성과 searchText를 비교하여 필터링합니다.
                 return city.areaNM!.hasPrefix(text)
             }
             
             self.aa.accept(filteredCities)
         }
         .disposed(by: disposeBag)
-        
-        
-//        let cities: [City] = [
-//            City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
-//            ,City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
-//
-//           , City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
-//            ,City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
-//           , City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
-//            ,City(areaNM: "Aa", livePpltnStts: nil, avgRoadData: nil, sbikeStts: nil, category: nil)
-//
-//            // 다른 도시 데이터
-//        ]
-//
-//        let citySectionModels = [CitySectionModel(header: "Section Header", items: cities)]
-//
-//        self.citiesRelay.accept(citySectionModels)
     }
-    
-    func getCitiesAPIInfo() {
-        restProcessor.makeRequest(
-        toURL: EndPoint.seoulCitiesData.url,
-        withHttpMethod: .get,
-        usage: .seoulCitiesData
-      )
-    }
-    
-    /// 도시 검색
-    func getCitiesSearchAPI(_ searchCity: String) {
-        restProcessor.urlQueryParameters.add(
-          value: searchCity,
-          forKey: "searchId"
-        )
         
-        restProcessor.makeRequest(
-          toURL: EndPoint.search.url,
-          withHttpMethod: .get,
-          usage: .search
-        )
-    }
-    
     func categorizeCities() {
         guard let seoulCities = seoulCities?.getCity() else { return }
         viewAll = seoulCities
