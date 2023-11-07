@@ -14,6 +14,7 @@ import Moya
 class CitiesUseCaseImpl: CitiesUseCase {
     let provider: MoyaProvider<APIHandler>
     var citiesList = PublishRelay<[Cities]>()
+    var citiesError = PublishRelay<Error>()
     
     init(provider: MoyaProvider<APIHandler>) {
         self.provider = provider
@@ -26,8 +27,7 @@ class CitiesUseCaseImpl: CitiesUseCase {
                 guard let cities = try? JSONDecoder().decode([Cities].self, from: res.data) else { return }
                 self.citiesList.accept(cities)
             case .failure(let error):
-                print(error)
-//                completion(.failure(error))
+                self.citiesError.accept(error)
             }
         }
     }

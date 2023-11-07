@@ -64,6 +64,7 @@
 		FE75E02D2AF3EE68005F1890 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = FE75E02C2AF3EE68005F1890 /* Moya */; };
 		FE75E02F2AF3EE68005F1890 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = FE75E02E2AF3EE68005F1890 /* ReactiveMoya */; };
 		FE75E0312AF3EE68005F1890 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = FE75E0302AF3EE68005F1890 /* RxMoya */; };
+		FE84FA1F2AFA818600D86C8B /* MyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE84FA1E2AFA818600D86C8B /* MyError.swift */; };
 		FE9121802A920D5E00C08B45 /* CityTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE91217F2A920D5E00C08B45 /* CityTab.swift */; };
 		FE9121822A9256CE00C08B45 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9121812A9256CE00C08B45 /* Extension+UIImage.swift */; };
 		FEA02EBC2AE4C93200280DA3 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = FEA02EBB2AE4C93200280DA3 /* RxGesture */; };
@@ -128,6 +129,7 @@
 		FE75E0222AF3DE32005F1890 /* CitiesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesUseCase.swift; sourceTree = "<group>"; };
 		FE75E0252AF3E076005F1890 /* CitiesUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesUseCaseImpl.swift; sourceTree = "<group>"; };
 		FE75E0272AF3ED8C005F1890 /* CitiesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesProvider.swift; sourceTree = "<group>"; };
+		FE84FA1E2AFA818600D86C8B /* MyError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyError.swift; sourceTree = "<group>"; };
 		FE91217F2A920D5E00C08B45 /* CityTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTab.swift; sourceTree = "<group>"; };
 		FE9121812A9256CE00C08B45 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		FEA773AB29CB43C30095B8FE /* RatioLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioLabelView.swift; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				FE91217F2A920D5E00C08B45 /* CityTab.swift */,
+				FE84FA1E2AFA818600D86C8B /* MyError.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 				FE06CBD429BDDABF003297E9 /* RoadCongestionCell.swift in Sources */,
 				FE06CBEE29BDDAE7003297E9 /* Extension+String.swift in Sources */,
 				FE75E0232AF3DE32005F1890 /* CitiesUseCase.swift in Sources */,
+				FE84FA1F2AFA818600D86C8B /* MyError.swift in Sources */,
 				FE06CBD729BDDABF003297E9 /* BikeAverageUtilizationRateView.swift in Sources */,
 				FE06CBDB29BDDABF003297E9 /* CityDetailController.swift in Sources */,
 				FE06CBD629BDDABF003297E9 /* BikeDockStatusCell.swift in Sources */,

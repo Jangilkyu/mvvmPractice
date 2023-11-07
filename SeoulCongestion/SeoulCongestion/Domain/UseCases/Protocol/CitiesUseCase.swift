@@ -13,5 +13,6 @@ import Moya
 protocol CitiesUseCase {
     var provider: MoyaProvider<APIHandler> { get }
     var citiesList: PublishRelay<[Cities]> { get set }
+    var citiesError: PublishRelay<Error> { get set}
     func requestCities()
 }

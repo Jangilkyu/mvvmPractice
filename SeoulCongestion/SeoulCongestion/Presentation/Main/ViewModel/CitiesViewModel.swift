@@ -17,8 +17,8 @@ class CitiesViewModel {
     public var citySearchTextFieldObserver = PublishRelay<String>()
     public var citySearchTextFieldOutPutObserver = PublishRelay<String>()
     public var automaticSearch = BehaviorRelay<String>(value: "")
-    public var aa = PublishRelay<[CitiesDTO]>()
-    public var cc = PublishRelay<[CitiesDTO]>()
+    public var automaticSearchObserver = PublishRelay<[CitiesDTO]>()
+    public var searchResultList = PublishRelay<[CitiesDTO]>()
     
     public var cityTabListObserver = PublishRelay<CityTab>()
     public var dropDownObserver = PublishRelay<String>()
@@ -26,7 +26,7 @@ class CitiesViewModel {
     public var didSelectTabObserver = PublishRelay<CityTab>()
     public var didSelectTabOutPutObserver = PublishRelay<[CitiesDTO]>()
     public var citiesRelay = BehaviorRelay<[CitySectionModel]>(value: [])
-    public var bb = PublishRelay<String>()
+    public var searchButtonObserver = PublishRelay<String>()
 
     /// 전체보기
     var viewAll: [CitiesDTO] = []
@@ -47,7 +47,7 @@ class CitiesViewModel {
     
     func bind() {
         
-        bb.subscribe { text in
+        searchButtonObserver.subscribe { text in
             guard let cities = self.seoulCities?.getCity() else { return }
             
             let filteredCities = cities.filter { city in
@@ -55,7 +55,7 @@ class CitiesViewModel {
             }
             
             
-            self.cc.accept(filteredCities)
+            self.searchResultList.accept(filteredCities)
         }
         .disposed(by: disposeBag)
         
@@ -83,7 +83,7 @@ class CitiesViewModel {
                 return city.areaNM!.hasPrefix(text)
             }
             
-            self.aa.accept(filteredCities)
+            self.automaticSearchObserver.accept(filteredCities)
         }
         .disposed(by: disposeBag)
     }

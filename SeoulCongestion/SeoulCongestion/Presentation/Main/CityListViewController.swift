@@ -72,7 +72,6 @@ class CityListViewController: UIViewController {
         InPutBind()
         OutPutBind()
     }
-    
 
     private func setUI() {
         view.addSubview(topLogoImageView)
@@ -144,7 +143,7 @@ class CityListViewController: UIViewController {
         
         citySearchTextField.searchButton.rx.tap.subscribe { a in
             guard let text = self.citySearchTextField.textField.text else { return }
-            self.viewModel.bb.accept(text)
+            self.viewModel.searchButtonObserver.accept(text)
         }
         .disposed(by: disposeBag)
 
@@ -189,7 +188,7 @@ class CityListViewController: UIViewController {
         }
         .disposed(by: disposeBag)
         
-        viewModel.aa.subscribe { city in
+        viewModel.automaticSearchObserver.subscribe { city in
             DispatchQueue.main.async {
                 self.cityCountView.cityCntLabel.text = String(city.count)
                 self.viewModel.seoulCities?.setCity(city: city)
@@ -198,7 +197,7 @@ class CityListViewController: UIViewController {
         }
         .disposed(by: disposeBag)
         
-        self.viewModel.cc.subscribe { filteredCities in
+        self.viewModel.searchResultList.subscribe { filteredCities in
             self.viewModel.seoulCities?.setCity(city: filteredCities)
             guard let tot = self.viewModel.seoulCities?.cities[0].cities?.count else { return }
 
@@ -222,9 +221,28 @@ class CityListViewController: UIViewController {
                         self.citySearchTextField.textField.isEnabled = true
                         self.cityTabListView.enableAllTabButtons()
                       }
-
         }
         .disposed(by: disposeBag)
+        
+        self.citiesUseCase.citiesError.subscribe { error in
+            if let myError = error as? MyError {
+                // MyError 유형을 처리
+                switch myError {
+                case .networkError:
+                    self.showAlert(title: "error", message: "Network error occurred")
+                case .decodingError:
+                    self.showAlert(title: "error", message: "Decoding error occurred")
+                }
+            }
+        }
+        .disposed(by: disposeBag)
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
     
   private func configureCollectionView() {
@@ -326,7 +344,7 @@ extension CityListViewController: UICollectionViewDelegateFlowLayout {
     layout collectionVIewLayout: UICollectionViewLayout,
     sizeForItemAt indexPath: IndexPath
   ) -> CGSize {
-    return CGSize(width: view.frame.width - 80, height: 165)
+    return CGSize(width: view.frame.width - 80, height: 119)
   }
 }
 
